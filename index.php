@@ -30,7 +30,7 @@ $checklist_files = scandir($checklist_dir);
 $checklists      = [];
 
 foreach ($checklist_files as $checklist) {
-	if (in_array($checklist, ['.', '..'])) {
+	if (in_array($checklist, ['.', '..', '.git'])) {
 		continue;
 	}
 
