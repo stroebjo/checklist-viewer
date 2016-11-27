@@ -8,5 +8,19 @@ composer.phar
 cache/
 checklists/
 
+# Temps
+node_modules/*
+.sass-cache/*
+*.bak
+tmp/*
+dist/*
+assets/bower/*
 
 
+# Operating System files
+.DS_Store
+Desktop.ini
+._*
+Thumbs.db
+.Spotlight-V100
+.Trashes

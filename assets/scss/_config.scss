@@ -1,0 +1,24 @@
+@charset "utf-8";
+
+// global variables and settings
+@import "variables/color";
+@import "variables/font";
+@import "variables/breakpoints";
+@import "variables/twbs"; // required for bootstrap build
+
+// our mixins and functions
+@import "functions";
+@import "mixins";
+
+// used libraries
+@import "../bower/include-media/dist/_include-media.scss"; // ease mediaquerry usage
+
+// use either noramlize…
+//@import "../bower/normalize-scss/_normalize.scss";
+
+// …or twitter bootstrap, but not both. ;-)
+@import "lib/bootstrap-custom";
+
+
+
+

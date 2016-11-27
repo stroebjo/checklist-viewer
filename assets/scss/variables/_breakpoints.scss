@@ -1,0 +1,8 @@
+/// Breakpount to be used in media() mixin and grid systems, etc.
+$breakpoints: (
+	'xs': 0,     // 0
+	'sm': 544,   // 544
+	'md': 768,   // 768
+	'lg': 992,   // 992
+	'xl': 1200,  // 1200
+);

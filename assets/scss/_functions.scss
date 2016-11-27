@@ -1,0 +1,22 @@
+/// z-index values. *NEVER* use a z-index vlaue directly
+/// in the SCSS code. Allwys use this array. So we are sure
+/// our z-index values are in order
+///
+/// Use with the helper function z(): z-index: z(overlay);
+///
+/// @see http://css-tricks.com/handling-z-index/
+///
+$zindex: (
+	overlay:	    2048,
+	dropdown:	    1024,
+	navigation-gfx: 768,
+	navigation:     512,
+	header:         500,
+	section:        400,
+	counter:        128
+);
+
+@function z($label) {
+	@return map-get($zindex, $label);
+}
+

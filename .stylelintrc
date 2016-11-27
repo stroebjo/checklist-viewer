@@ -1,0 +1,30 @@
+{
+	"rules": {
+
+		"color-hex-case": "lower",
+
+		"color-hex-length": "short",
+
+		"number-leading-zero": "never",
+
+		"block-no-empty": null,
+
+		"color-no-invalid-hex": true,
+
+		"comment-empty-line-before": [ "always", {
+			"ignore": ["stylelint-commands", "between-comments"],
+		}],
+
+		"declaration-colon-space-after": "always",
+
+		"indentation": ["tab", {
+			"except": ["value"]
+		}],
+
+		"max-empty-lines": null,
+
+		"rule-nested-empty-line-before": null,
+
+		"unit-whitelist": ["em", "rem", "%", "s", "px", "deg", "vh"]
+	}
+}

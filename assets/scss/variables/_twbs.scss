@@ -1,0 +1,14 @@
+// use our breakpoints settings to overwerite Bootstrap breakpoints.
+// Thos are the exact same values from bootstrpa, but htis way, twbs depends on us, and not we on it.
+//
+// ATTENTION: the `+ 0px` is needed due to twbs expects the breakppints to have a unit.
+$grid-breakpoints: (
+	xs: map-get($breakpoints, xs),        // 0
+	sm: map-get($breakpoints, sm) + 0px, // 544
+	md: map-get($breakpoints, md) + 0px, // 768
+	lg: map-get($breakpoints, lg) + 0px, // 992
+	xl: map-get($breakpoints, xl) + 0px, // 1200
+);
+
+// enable flexbox grid
+$enable-flex: true;
