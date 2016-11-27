@@ -13,7 +13,7 @@
 <div class="l-all">
 
 	<header class="navbar-dark bg-inverse p-1">
-		<a href="{{ url() }}">Checklist</a>
+		<a class="navbar-brand" href="{{ url() }}">Checklist viewer</a>
 	</header>
 
 
