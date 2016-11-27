@@ -25,7 +25,7 @@
 	<footer class="l-footer">
 	</footer>
 
-	<script src="dist/build/js/main.js"></script>
+	<script src="dist/build/js/main.min.js"></script>
 </div>
 </body>
 </html>
