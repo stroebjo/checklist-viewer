@@ -6,7 +6,13 @@
 
 @section('content')
 
-	<h2 class="mt-1 mb-1">{{ $checklist->name }}</h2>
+	<header class="mt-1 mb-2">
+		<h2 class="">{{ $checklist->name }}</h2>
+
+		<i class="text-muted">
+			Last edited at <time data-toggle="tooltip" title="{{ date('c', $checklist->changed) }}" datetime="{{ date('c', $checklist->changed) }}">{{ date('Y-m-d', $checklist->changed) }}</time>.
+		</i>
+	</header>
 
 	@foreach ($checklist->items as $item)
 
@@ -33,7 +39,7 @@
 		@if($item->description)
 
 			<div class="collapse" id="checklistItem{{$loop->index}}">
-				<div class="p-1">
+				<div class="px-1 pt-1">
 					{!! $item->descriptionHTML !!}
 				</div>
 			</div>
@@ -43,5 +49,16 @@
 
 
 	@endforeach
+
+	<nav class="navbar navbar-light mt-1">
+		<ul class="nav navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" download href="{{ url($checklist->path) }}">Download</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#" onclick="window.print();">Print</a>
+			</li>
+		</ul>
+	</nav>
 
 @endsection

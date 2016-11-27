@@ -11,18 +11,21 @@ class Checklist {
 
 	public function __construct($filename)
 	{
-		$this->id = basename($filename, '.md');
+		$this->id      = basename($filename, '.md');
+		$this->path    = $filename;
+		$this->changed = filemtime($filename);
+		// -> remember! there is no createn date
 
 		$md = file_get_contents($filename);
 
-		$needle = '## ';
-
+		// get name
 		preg_match('/# (.+)/', $md, $m);
-
 		$this->name = trim($m[1]);
 
+		// scrape all todos
+		$needle     = '## ';
 		$positions  = [];
-		$lastPos = 0;
+		$lastPos    = 0;
 
 		while (($lastPos = strpos($md, $needle, $lastPos)) !== false) {
 			$positions[] = $lastPos;
