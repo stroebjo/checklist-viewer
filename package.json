@@ -1,6 +1,8 @@
 {
   "private": true,
 
+  "version": "0.0.1",
+
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "grunt": "~0.4.5",
