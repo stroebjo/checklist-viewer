@@ -25,17 +25,35 @@ function get_selection($all, $needle) {
 	return false;
 }
 
-$checklist_dir   = 'checklists/';
-$checklist_files = scandir($checklist_dir);
+
 $checklists      = [];
+$checklist_dir   = 'checklists/';
 
-foreach ($checklist_files as $checklist) {
-	if (in_array($checklist, ['.', '..', '.git'])) {
-		continue;
-	}
+// Will exclude everything under these directories
+$exclude = ['.git'];
 
-	$checklists[] = new Checklist($checklist_dir . $checklist);
+/**
+ * @param SplFileInfo $file
+ * @param mixed $key
+ * @param RecursiveCallbackFilterIterator $iterator
+ * @return bool True if you need to recurse or if the item is acceptable
+ */
+$filter = function ($file, $key, $iterator) use ($exclude) {
+    if ($iterator->hasChildren() && !in_array($file->getFilename(), $exclude)) {
+        return true;
+    }
+    return $file->isFile();
+};
+
+$iterator = new RecursiveDirectoryIterator($checklist_dir);
+$iterator->setFlags(RecursiveDirectoryIterator::SKIP_DOTS);
+$rii = new RecursiveIteratorIterator(new RecursiveCallbackFilterIterator( $iterator, $filter));
+
+foreach ($rii as $file) {
+	$checklists[] = new Checklist($file);
 }
+
+
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
@@ -43,7 +61,7 @@ $cache = __DIR__ . '/cache';
 $blade = new Blade($views, $cache);
 
 
-// check for URL
+// check for URL: overview or detail page
 $selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
 
 if (!empty($selection) && $selection = get_selection($checklists, $selection)) {
