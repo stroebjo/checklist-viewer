@@ -40,8 +40,9 @@ class Checklist {
 			}
 
 			preg_match('/## (.+)/', $item, $m);
+
 			$item_name = $m[1];
-			$item_description = preg_replace('/^.+\n/', '', $item);
+			$item_description = preg_replace('/## (.+)/', '', $item);
 
 			$this->items[] = new ChecklistItem(
 				$item_name,
