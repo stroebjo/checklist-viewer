@@ -39,7 +39,7 @@ $exclude = ['.git'];
  * @return bool True if you need to recurse or if the item is acceptable
  */
 $filter = function ($file, $key, $iterator) use ($exclude) {
-    if ($iterator->hasChildren() && !in_array($file->getFilename(), $exclude)) {
+	if ($iterator->hasChildren() && !in_array($file->getFilename(), $exclude)) {
         return true;
     }
     return $file->isFile();
@@ -50,6 +50,11 @@ $iterator->setFlags(RecursiveDirectoryIterator::SKIP_DOTS);
 $rii = new RecursiveIteratorIterator(new RecursiveCallbackFilterIterator( $iterator, $filter));
 
 foreach ($rii as $file) {
+
+	if (in_array(basename($file), ['.gitlab-ci.yml'])) {
+		continue;
+	}
+
 	$checklists[] = new Checklist($file);
 }
 
