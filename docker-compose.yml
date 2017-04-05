@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  composer:
+    restart: 'no'
+    image: composer/composer
+    command: install
+    volumes:
+      - .:/app
