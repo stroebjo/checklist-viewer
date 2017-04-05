@@ -1,11 +1,8 @@
 <?php
 
-require 'vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
+
 use Philo\Blade\Blade;
-
-
-require_once('app/Checklist.php');
-require_once('app/ChecklistItem.php');
 
 function url($url = null) {
 	$path = $_SERVER['SCRIPT_NAME'];
@@ -55,7 +52,7 @@ foreach ($rii as $file) {
 		continue;
 	}
 
-	$checklists[] = new Checklist($file);
+	$checklists[] = new \App\Checklist($file);
 }
 
 

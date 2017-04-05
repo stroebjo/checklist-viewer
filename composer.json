@@ -1,6 +1,11 @@
 {
-    "require": {
-        "erusev/parsedown": "^1.6",
-        "philo/laravel-blade": "^3.1"
+  "require": {
+      "erusev/parsedown": "^1.6",
+      "philo/laravel-blade": "^3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
     }
+  }
 }
