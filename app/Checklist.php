@@ -23,11 +23,14 @@ class Checklist {
 		$this->name = trim((isset($m[1])) ? $m[1] : $filename);
 
 		// scrape all todos
-		$needle     = '## ';
+		$needle     = "\n## ";
 		$positions  = [];
 		$lastPos    = 0;
 
 		while (($lastPos = strpos($md, $needle, $lastPos)) !== false) {
+
+			// @todo check for second headings. don't use third, etc.
+
 			$positions[] = $lastPos;
 			$lastPos = $lastPos + strlen($needle);
 		}
