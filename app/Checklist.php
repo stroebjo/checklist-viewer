@@ -20,7 +20,7 @@ class Checklist {
 
 		// get name
 		preg_match('/# (.+)/', $md, $m);
-		$this->name = trim($m[1]);
+		$this->name = trim((isset($m[1])) ? $m[1] : $filename);
 
 		// scrape all todos
 		$needle     = '## ';
