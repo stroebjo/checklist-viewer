@@ -13,11 +13,12 @@ function url($url = null) {
 	$base = dirname($path);
 	$root = rtrim($base, '/') . '/';
 
+
 	return htmlspecialchars($root . $url);
 }
 
 function return_breadcrumb() {
-	$selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
+	$selection = substr($_SERVER['REQUEST_URI'], strlen(url()));
 	$selection = preg_replace('/[^a-z0-9-\/]/i', '', $selection);
 
 	$return = [];
@@ -43,10 +44,9 @@ function return_breadcrumb() {
 
 
 // check for URL: overview or detail page
-$selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
+$selection = substr($_SERVER['REQUEST_URI'], strlen(url()));
 $selection = preg_replace('/[^a-z0-9-\/]/i', '', $selection);
 define('CHECKLIST_DIR', __DIR__.'/'.getenv('CHECKLIST_DIRECTORY'));
-
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';

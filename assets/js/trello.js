@@ -72,17 +72,18 @@
 		} else {
 			Trello.authorize({
 				type: 'popup',
-				name: 'Getting Started Application',
+				name: 'Chcecklist Viewer',
 				scope: {
-				read: 'true',
-				write: 'true' },
+					read: 'true',
+					write: 'true'
+				},
 				expiration: 'never',
 				success: function() {
 					$('#modal-trello').modal('show');
 					loadBoards();
 				},
 				error: function() {
-					alert('Something went wrong. You need to authorize the app to push cards to your Trello.');
+					console.log('Failed to authorize user');
 				}
 			});
 		}
@@ -104,7 +105,6 @@
 
 	// add
 	$('.js-trello-add_cards').on('click', function() {
-
 
 		if($('.js-trello-individual').is(':checked')) {
 
