@@ -12,38 +12,47 @@ function url($url = null) {
 	return htmlspecialchars($root . $url);
 }
 
-function get_selection($all, $needle) {
-	foreach($all as $a) {
-		if ($a->id === $needle) {
-			return $a;
+function return_breadcrumb() {
+	$selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
+	$selection = preg_replace('/[^a-z0-9-\/]/i', '', $selection);
+
+	$return = [];
+	$items = explode('/', $selection);
+
+	foreach($items as $i => $item) {
+
+		if (empty($item)) {
+			continue;
 		}
+
+		$oItem = new stdClass();
+		$oItem->name = $item;
+		$oItem->href = implode('/', array_slice($items, 0, $i + 1));
+
+
+		$return[] = $oItem;
+
 	}
 
-	return false;
+	return $return;
 }
+
 
 // check for URL: overview or detail page
 $selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
 $selection = preg_replace('/[^a-z0-9-\/]/i', '', $selection);
-
-$checklists      = [];
-$checklists_folder = [];
 define('CHECKLIST_DIR', __DIR__.'/checklists/');
 
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
-
 $blade = new Blade($views, $cache);
-
-
-
-// Will exclude everything under these directories
-$exclude = ['.git'];
 
 if (is_dir(CHECKLIST_DIR . $selection )) {
 
 	// show directory listing of current dir.
+	$checklists      = [];
+	$checklists_folder = [];
 
 	$dir = new DirectoryIterator(CHECKLIST_DIR . $selection );
 

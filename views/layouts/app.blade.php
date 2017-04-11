@@ -18,6 +18,10 @@
 
 
 	<div class="container">
+
+			@include('utillities.breadcrumb')
+
+
 			@yield('content')
 	</div>
 
