@@ -7,9 +7,9 @@
 @section('content')
 
 	<header class="mt-1 mb-2">
-		<h2 class="">{{ $checklist->name }}</h2>
+		<h1 class="h3">{{ $checklist->name }}</h1>
 
-		<i class="text-muted">
+		<i class="text-muted small">
 			Last edited at <time data-toggle="tooltip" title="{{ date('c', $checklist->changed) }}" datetime="{{ date('c', $checklist->changed) }}">{{ date('Y-m-d', $checklist->changed) }}</time>.
 		</i>
 	</header>

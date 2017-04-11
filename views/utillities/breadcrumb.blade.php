@@ -2,7 +2,7 @@
   <a class="breadcrumb-item" href="{{ url() }}">Home</a>
 
   @foreach(return_breadcrumb() as $item)
-	  <a class="breadcrumb-item" href="{{ url($item->href) }}">{{ $item->name }}</a>
+	  <a class="breadcrumb-item @if($loop->last) active @endif" href="{{ url($item->href) }}">{{ $item->name }}</a>
   @endforeach
 
 </nav>
