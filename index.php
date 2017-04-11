@@ -4,6 +4,10 @@ require __DIR__.'/vendor/autoload.php';
 
 use Philo\Blade\Blade;
 
+// load .env settings
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 function url($url = null) {
 	$path = $_SERVER['SCRIPT_NAME'];
 	$base = dirname($path);
@@ -41,7 +45,7 @@ function return_breadcrumb() {
 // check for URL: overview or detail page
 $selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
 $selection = preg_replace('/[^a-z0-9-\/]/i', '', $selection);
-define('CHECKLIST_DIR', __DIR__.'/checklists/');
+define('CHECKLIST_DIR', __DIR__.'/'.getenv('CHECKLIST_DIRECTORY'));
 
 
 $views = __DIR__ . '/views';
