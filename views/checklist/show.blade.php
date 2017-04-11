@@ -19,7 +19,7 @@
 	<div class="card">
 		<div class="card-header">
 			@if($item->description)
-				<div class="float-xs-right">
+				<div class="float-right">
 					<button class="btn btn-sm btn-link" type="button" data-toggle="collapse" data-target="#checklistItem{{$loop->index}}" aria-expanded="false" aria-controls="checklistItem{{$loop->index}}">
 						Details
 					</button>
@@ -39,7 +39,7 @@
 		@if($item->description)
 
 			<div class="collapse" id="checklistItem{{$loop->index}}">
-				<div class="px-1 pt-1">
+				<div class="px-3 pt-3">
 					{!! $item->descriptionHTML !!}
 				</div>
 			</div>
@@ -50,8 +50,8 @@
 
 	@endforeach
 
-	<nav class="navbar navbar-light mt-1">
-		<ul class="nav navbar-nav">
+	<nav class="navbar navbar-light navbar-toggleable-md mt-1">
+		<ul class="navbar-nav ">
 			<li class="nav-item">
 				<a class="nav-link" download href="{{ url($checklist->path) }}">Download</a>
 			</li>
