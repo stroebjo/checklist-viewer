@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="dist/build/css/style.css" rel="stylesheet">
+	<link href="{{ url('dist/build/css/style.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -25,7 +25,7 @@
 	<footer class="l-footer">
 	</footer>
 
-	<script src="dist/build/js/main.min.js"></script>
+	<script src="{{ url('dist/build/js/main.min.js') }}"></script>
 </div>
 </body>
 </html>
