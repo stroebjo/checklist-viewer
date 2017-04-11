@@ -12,7 +12,10 @@ class Checklist {
 
 	public function __construct($filename)
 	{
-		$this->id      = basename($filename, '.md');
+		$scope = str_replace(CHECKLIST_DIR, '', $filename);
+
+		$this->id = pathinfo($scope, PATHINFO_DIRNAME) . '/' . pathinfo($scope, PATHINFO_FILENAME);
+
 		$this->path    = $filename;
 		$this->changed = filemtime($filename);
 		// -> remember! there is no createn date

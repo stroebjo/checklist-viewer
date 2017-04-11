@@ -22,39 +22,13 @@ function get_selection($all, $needle) {
 	return false;
 }
 
+// check for URL: overview or detail page
+$selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
+$selection = preg_replace('/[^a-z0-9-\/]/i', '', $selection);
 
 $checklists      = [];
-$checklist_dir   = 'checklists/';
-
-// Will exclude everything under these directories
-$exclude = ['.git'];
-
-/**
- * @param SplFileInfo $file
- * @param mixed $key
- * @param RecursiveCallbackFilterIterator $iterator
- * @return bool True if you need to recurse or if the item is acceptable
- */
-$filter = function ($file, $key, $iterator) use ($exclude) {
-	if ($iterator->hasChildren() && !in_array($file->getFilename(), $exclude)) {
-        return true;
-    }
-    return $file->isFile();
-};
-
-$iterator = new RecursiveDirectoryIterator($checklist_dir);
-$iterator->setFlags(RecursiveDirectoryIterator::SKIP_DOTS);
-$rii = new RecursiveIteratorIterator(new RecursiveCallbackFilterIterator( $iterator, $filter));
-
-foreach ($rii as $file) {
-
-	if (in_array(basename($file), ['.gitlab-ci.yml'])) {
-		continue;
-	}
-
-	$checklists[] = new \App\Checklist($file);
-}
-
+$checklists_folder = [];
+define('CHECKLIST_DIR', __DIR__.'/checklists/');
 
 
 $views = __DIR__ . '/views';
@@ -63,14 +37,47 @@ $cache = __DIR__ . '/cache';
 $blade = new Blade($views, $cache);
 
 
-// check for URL: overview or detail page
-$selection = str_replace(url(), '', $_SERVER['REQUEST_URI']);
 
-if (!empty($selection) && $selection = get_selection($checklists, $selection)) {
-	echo $blade->view()->make('checklist.show', ['checklist' => $selection])->render();
+// Will exclude everything under these directories
+$exclude = ['.git'];
+
+if (is_dir(CHECKLIST_DIR . $selection )) {
+
+	// show directory listing of current dir.
+
+	$dir = new DirectoryIterator(CHECKLIST_DIR . $selection );
+
+	foreach ($dir as $fileinfo) {
+
+		// skip . and ..
+		if ($fileinfo->isDot()) {
+			continue;
+		}
+
+		// skip files
+		if (in_array($fileinfo->getFilename(), ['.git', '.gitlab-ci.yml'])) {
+			continue;
+		}
+
+		if ($fileinfo->isFile()) {
+			$checklists[] = new \App\Checklist($fileinfo->getPathname());
+		} else {
+			$checklists_folder[] = new \App\Folder($fileinfo->getPathname());
+		}
+	}
+
+	echo $blade->view()->make('checklist.list', ['checklists_folder' => $checklists_folder, 'checklists' => $checklists])->render();
+
+
+} else if (is_file(CHECKLIST_DIR . $selection . '.md')) {
+
+	// actual file is selected. Show it.
+
+	$checklist = new \App\Checklist(CHECKLIST_DIR . $selection . '.md');
+
+	echo $blade->view()->make('checklist.show', ['checklist' => $checklist])->render();
 } else {
-	echo $blade->view()->make('checklist.list', ['checklists' => $checklists])->render();
+	// 404, ¯\_(ツ)_/¯
+	echo $blade->view()->make('error.404')->render();
 }
-
-
 
