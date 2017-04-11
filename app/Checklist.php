@@ -57,4 +57,22 @@ class Checklist {
 			);
 		}
 	}
+
+	/**
+	 * Return simple array of todos for trello integration.
+	 *
+	 */
+	public function getItems()
+	{
+		$items = [];
+
+		foreach($this->items as $item) {
+			$items[] = [
+				'name' => $item->name,
+				'description' => $item->description,
+			];
+		}
+
+		return $items;
+	}
 }

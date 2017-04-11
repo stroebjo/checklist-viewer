@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href="{{ url('dist/build/css/style.css') }}" rel="stylesheet">
+
+	@yield('head')
 </head>
 <body>
 
@@ -28,8 +30,8 @@
 
 	<footer class="l-footer">
 	</footer>
-
-	<script src="{{ url('dist/build/js/main.min.js') }}"></script>
 </div>
+<script src="{{ url('dist/build/js/main.min.js') }}"></script>
+@if (getenv('TRELLO_APP_KEY'))<script src="https://api.trello.com/1/client.js?key={{ getenv('TRELLO_APP_KEY') }}"></script>@endif
 </body>
 </html>

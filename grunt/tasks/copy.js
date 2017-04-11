@@ -13,17 +13,6 @@ module.exports = function (grunt) {
 				{expand: true, cwd: '<%= conf.dir.assets %>', src: ['img/*'], dest: '<%= conf.dir.compileto %>', filter: 'isFile'},
 			]
 		},
-		content: {
-			files: [
-				{expand: true, cwd: '<%= conf.dir.assets %>', src: ['content/**'], dest: '<%= conf.dir.compileto %>'},
-			]
-		},
-		doku: {
-			files: [
-				{expand: true, cwd: '<%= conf.dir.assets %>', src: ['doku/**'], dest: '<%= conf.dir.compileto %>'},
-			]
-		}
-
 	});
 };
 
