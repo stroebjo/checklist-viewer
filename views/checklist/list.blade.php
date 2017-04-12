@@ -3,7 +3,7 @@
 @section('title', 'Overview')
 
 @section('content')
-	<h2 class="mt-1 mb-1">Available checklists</h2>
+	<h1 class="mt-1 mb-3 h3">Available checklists</h1>
 
 
 	@foreach ($checklists_folder as $folder)

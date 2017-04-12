@@ -14,8 +14,14 @@
 
 <div class="l-all">
 
-	<header class="navbar-dark bg-inverse p-1 clearfix">
-		<a class="navbar-brand" href="{{ url() }}">Checklist viewer</a>
+	<header class="navbar navbar-light bg-faded">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<a class="navbar-brand" href="{{ url() }}">Checklist viewer</a>
+				</div>
+			</div>
+		</div>
 	</header>
 
 
