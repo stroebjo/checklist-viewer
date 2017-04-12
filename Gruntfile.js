@@ -26,5 +26,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('svg', [ 'clean:svg', 'svgmin']);
 
-	grunt.registerTask('bumpversion', ['bump-only', 'conventionalChangelog', 'bump-commit']);
+	grunt.registerTask('bumpfix',     ['bump-only', 'conventionalChangelog', 'bump-commit']);
+	grunt.registerTask('bumpminor',   ['bump-only:minor', 'conventionalChangelog', 'bump-commit']);
+	grunt.registerTask('bumpmajor',   ['bump-only:major', 'conventionalChangelog', 'bump-commit']);
 };
