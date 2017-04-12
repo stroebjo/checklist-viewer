@@ -1,12 +1,45 @@
 (function(){
 
+	var ajaxInProgress = false;
+
+	var _amountRequests = 0;
+	var _spinner;
+	var _spinnerCallback;
+
+	var startSpin = function(amountRequests, $target, callback) {
+		_amountRequests = amountRequests;
+		_spinnerCallback = callback;
+		_spinner = new Spinner({
+
+		}).spin();
+
+		$target[0].appendChild(_spinner.el);
+	};
+
+	var addSpin = function(am) {
+		_amountRequests += am;
+	};
+
+	var stopSpin = function() {
+		_amountRequests--;
+
+		if (_amountRequests <= 0) {
+			_spinner.stop();
+			if (typeof _spinnerCallback === 'function') {
+				_spinnerCallback();
+			}
+		}
+	};
+
+
+
 	var loadedBoards = function(boards) {
 		var $boards = $('.js-trello-boards');
 		$boards.empty();
 
 		$.each(boards, function(index, value) {
 			if (!value.closed) {
-				$boards.append($("<option></option>").attr("value", value.id).text(value.name));
+				$boards.append($("<option></option>").attr("value", value.id).text(value.name + ((value.starred) ? ' ★' : '') ));
 			}
 		});
 	};
@@ -52,12 +85,14 @@
 	 *
 	 */
 	var createdChecklist = function(data) {
-		console.log(data);
+		addSpin(checklist.items.length);
+		stopSpin(); // created checklist card ;)
+
 		$.each(checklist.items, function(i, item) {
 			Trello.post('/checklists/' + data.id + '/checkItems/', {
 				name: item.name
 			}, function(data) {
-				console.log('created checklisten item' + JSON.stringify(data));
+				stopSpin();
 			});
 		});
 	};
@@ -110,6 +145,10 @@
 
 		if($('.js-trello-individual').is(':checked')) {
 
+			startSpin(checklist.items.length, $('.js-trello-add_cards'), function() {
+				$('#modal-trello').modal('hide');
+			});
+
 			// add each checklist item as individual card
 			$.each(checklist.items, function(i, item) {
 
@@ -118,13 +157,16 @@
 					desc: item.description,
 					idList: $('.js-trello-lists').val(),
 				}, function(data) {
+					stopSpin();
 					// success
 				});
 
 			});
-
-
 		} else {
+
+			startSpin(1, $('.js-trello-add_cards'), function() {
+				$('#modal-trello').modal('hide');
+			});
 
 			var newCard = {
 				name: checklist.name,
