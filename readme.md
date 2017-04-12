@@ -5,6 +5,8 @@ ChecklistViewer is a simple  wrapper around markdown files which will be rendere
 
 You store the markdown checklist files in a seperate git repository so you can versioncontrol them and collaborate on them with everyone in your team. The wrapper adds a simple web interface around the markdown files to check off single todos. Additionally you can print the checklists or export them to your [Trello board](https://trello.com).
 
+![screenshot](assets/docs/checklistviewer-demo.png)
+
 ## Checklist format
 
 
