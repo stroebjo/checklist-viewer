@@ -5,7 +5,9 @@
 		$boards.empty();
 
 		$.each(boards, function(index, value) {
-			$boards.append($("<option></option>").attr("value", value.id).text(value.name));
+			if (!value.closed) {
+				$boards.append($("<option></option>").attr("value", value.id).text(value.name));
+			}
 		});
 	};
 
