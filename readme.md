@@ -1,15 +1,16 @@
 # ChecklistViewer
 
 
-ChecklistViewer is a simple website wrapper around markdown files which will be rendered as checklists. Think of those markdown files as tempaltes for recurring checklists you need to check off. For example project setups or monthly recurring taks with multiple steps.
+ChecklistViewer is a simple website wrapper around markdown files which will be rendered as checklists. Think of those markdown files as templates for recurring sets of todos you need to check off. For example project setups or monthly tasks with multiple steps.
 
-You store the markdown file in a seperate git repository so you can versioncontrol them and collaborte on them with everyone in your team. The wrapper adds simple interface around the markdown files to check off single todos. Additionally you can print the checklists or export them to your [Trello board](https://trello.com).
+You store the markdown file in a seperate git repository so you can versioncontrol them and collaborate on them with everyone in your team. The wrapper adds a simple interface around the markdown files to check off single todos. Additionally you can print the checklists or export them to your [Trello board](https://trello.com).
 
 ## Checklist format
 
-You can use all common markdown features.
 
-The first heading in a file will be the name of the checklist, all second level headings are individual checklist items. The content beneath a heading is the (optional) item description where you can write down additional information regarding the todo item.
+The first heading in a file will be the name of the checklist, all second level headings are individual checklist items. The content beneath a heading is the (optional) item description where you can write additional information regarding the item.
+
+You can use [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 Example:
 
@@ -32,7 +33,7 @@ Description of __the__ first item
 
 ```
 
-Save your markdown files in an empty folder, and organize them in any folder structure you want.
+Save your markdown files in an empty folder, and organize them into any folder structure you want.
 
 
 ## Installation
@@ -53,7 +54,7 @@ If you want to export your checklists to Trello add your [Trello API Key](https:
 
 Create an empty direcotry `checklists/` and init a new git repository. In this direcotry add as many markdown files in the above syntax, you can also use folders to stucture them.
 
-Open the `index.php` in your browser! (maybe you need the change the `RewriteBase` in the `.htaccess` file to math your environment)
+Open the project folder with the `index.php` in your browser! (maybe you need the change the `RewriteBase` in the `.htaccess` file to match your environment)
 
 ## Meta
 
